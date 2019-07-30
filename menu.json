@@ -1,0 +1,44 @@
+{
+  "menus": [
+    {
+      "name": "我们是",
+      "sub": [
+        {
+          "name": "不忘初心",
+          "link": "",
+          "type": "图片",
+          "content": ""
+        },
+        {
+          "name": "公司介绍",
+          "link": "",
+          "type": "图片",
+          "content": "我們是一家朝氣蓬勃、無畏、自信、心懷志願、滿腔熱忱的年輕公司。\n       新生伊始，我們便矚目高遠，將行業翹楚和產業先鋒作為我們奮鬥的目標。憑藉初生牛犢的勇猛，資訊時代的助推，我們將在技術、服務、管理、理念等方面上建立超越前者的新興高地！\n       物競天擇，強者存生。現實如同戰場，每一天我們都要被堅執銳，攻城掠地。曠野間的雄獅、高山上的猛虎、蒼穹中的獵鷹、荒原裡的蒼狼，都是我們信仰的圖騰。\n       生命不息，求索不止。當暮年回首，方能無愧於光陰，補益於世界！面對前途，我們要不斷的自我修正、自我完善，失敗不氣餒，勝利不驕傲。因篤定而腳踏實地，因堅韌而一往無前。唯有秉持此番意念，才能向目標接近，並在實踐的路上不住創新，不斷蛻變，終得大成！"
+        }
+      ]
+    },
+    {
+      "name": "提升着",
+      "sub": [
+        {
+          "name": "个人中心",
+          "link": "https://mp.weixin.qq.com/mp/homepage?__biz=MzU5Nzc2NDY4Ng==&hid=1&sn=0d60d5d350735830a3c5dfcbb391242d&scene=18",
+          "type": "链接",
+          "content": ""
+        },
+        {
+          "name": "请您进店",
+          "link": "pages/shelf/shelf",
+          "type": "小程序",
+          "content": "http://mp.weixin.qq.com/bizmall/mallshelf?id=&t=mall/list&biz=MzU5Nzc2NDY4Ng==&shelf_id=1&showwxpaytitle=1#wechat_redirect"
+        },
+        {
+          "name": "请领福利",
+          "link": "https://mp.weixin.qq.com/mp/homepage?__biz=MzU5Nzc2NDY4Ng==&hid=1&sn=0d60d5d350735830a3c5dfcbb391242d&scene=18",
+          "type": "链接",
+          "content": ""
+        }
+      ]
+    }
+  ]
+}
