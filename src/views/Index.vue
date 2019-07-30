@@ -2,16 +2,17 @@
   <van-row class="banner-box">
     <div class="header">
       <van-col span="24">
-        <van-swipe :autoplay="2500">
+        <van-skeleton v-if="!banners" title :row="4" style="background-color: white" />
+        <van-swipe v-if="banners" :autoplay="2500" indicator-color="#fe1111">
           <van-swipe-item v-for="(image, index) in banners" :key="index">
-            <van-image height="160" :src="image" @click="bannerClickEvent(index)" />
+            <van-image height="160" :src="image.image" @click="bannerClickEvent(image.title)" />
           </van-swipe-item>
         </van-swipe>
       </van-col>
       <van-col class="mx-3 notice-box" span="24">
         <van-notice-bar
                 @click="noticeClickEvent"
-                text=" 👏 圆堂产权办理查询系统正式上线啦~"
+                :text="notice"
                 left-icon="volume-o"
         />
       </van-col>
@@ -19,7 +20,7 @@
     <div class="main">
       <van-col span="24" class="mx-3 service-box">
         <van-cell value="圆堂服务" style="font-weight: bold" />
-        <van-grid :column-num="4" clickable="true" center="true" square="true">
+        <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
           <van-grid-item
                   @click="maintain"
                   icon="http://deed.static.wowphp.cn/icons/house.png"
@@ -55,7 +56,7 @@
 
       <van-col span="24" class="mx-3 service-box">
         <van-cell value="品质生活" style="font-weight: bold" />
-        <van-grid :column-num="4" clickable="true" center="true" square="true">
+        <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
           <van-grid-item
                   @click="maintain"
                   icon="http://deed.static.wowphp.cn/icons/youhua_home@2x.png"
@@ -72,7 +73,7 @@
                   text="有人有事"
           />
           <van-grid-item
-                  @click="maintain"
+                  @click="maintain()"
                   icon="http://deed.static.wowphp.cn/icons/youjiu_home@2x.png"
                   text="有食有酒"
           />
@@ -85,19 +86,37 @@
 <script>
   export default {
     name: 'Index',
-    data() {
+    data () {
       return {
-        banners: [
-          'http://deed.static.wowphp.cn/640.jpeg',
-          'http://deed.static.wowphp.cn/images/banners/20190725/B5d390ff8daac9.jpg',
-          'http://deed.static.wowphp.cn/images/banners/20190725/B5d390ecba94e1.jpg/SrL5SZNqUthxNIg3zJMbSyu4DJ2afvD6WNu23FyV.jpeg',
-        ]
+        notice: '',
+        banners: null
       }
     },
+    mounted () {
+      this.getData();
+    },
     methods: {
-      maintain() {
+      getData() {
+        ['banner', 'notice'].forEach((url,index) => {
+          this.$axios.get(url)
+            .then(r => {
+              if (index) {
+                this.notice = r.data.data.notice
+              }
+              else {
+                this.banners = r.data.data
+              }
+            })
+            .catch(e => {
+              this.$toast.alert({
+                message: '网络错误，请重试!'
+              })
+            })
+        })
+      },
+      maintain(e) {
         this.$dialog.alert({
-          message: '此服务近期上线，敬请期待！'
+          message: e.target.innerText ? '您点击了' + e.target.innerText : '近期开放，敬请期待!'
         });
       },
       bannerClickEvent(index) {
@@ -109,9 +128,6 @@
     }
   }
 </script>
-
 <style scoped>
-.main {
-  height: calc(100vh - 300px) !important;
-}
+
 </style>
