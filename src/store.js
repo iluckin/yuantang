@@ -5,11 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    banners: null,
-    notice: ''
+
   },
   mutations: {
-    //
+
   },
   actions: {
 
