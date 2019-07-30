@@ -9,9 +9,9 @@ import 'vant/lib/index.css'
 import './registerServiceWorker'
 
 Vue.use(Vant)
-Vue.config.productionTip = true
+Vue.config.productionTip = false
 Vue.prototype.$axios = axios.create({
-  baseURL: Vue.config.productionTip ? 'https://pc.yuantang.iluckin.cn/api/' : 'http://172.16.5.67:9000/api/',
+  baseURL: process.env.productionTip ? 'https://pc.yuantang.iluckin.cn/api/' : 'http://172.16.5.67:9000/api/',
   headers: { 'X-AUTH-ID': 'Nice2019' }
 })
 

@@ -2,7 +2,7 @@
   <van-row class="banner-box">
     <div class="header">
       <van-col span="24">
-        <van-skeleton v-if="!banners" title :row="4" style="background-color: white" />
+        <van-skeleton v-if="!banners" title :row="5" style="background-color: white" />
         <van-swipe v-if="banners" :autoplay="2500" indicator-color="#fe1111">
           <van-swipe-item v-for="(image, index) in banners" :key="index">
             <van-image height="160" :src="image.image" @click="bannerClickEvent(image.title)" />
@@ -22,19 +22,19 @@
         <van-cell value="圆堂服务" style="font-weight: bold" />
         <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
           <van-grid-item
-                  @click="maintain"
                   icon="http://deed.static.wowphp.cn/icons/house.png"
                   text="住宅产权"
+                  to="/credentials/house"
           />
           <van-grid-item
-                  @click="maintain"
                   icon="http://deed.static.wowphp.cn/icons/work-1.png"
                   text="商业产权"
+                  to="/credentials/store"
           />
           <van-grid-item
-                  @click="maintain"
                   icon="http://deed.static.wowphp.cn/icons/car.png"
                   text="车位产权"
+                  to="/credentials/park"
           />
           <van-grid-item
                   @click="maintain"
@@ -73,9 +73,10 @@
                   text="有人有事"
           />
           <van-grid-item
-                  @click="maintain()"
+                  @click="maintain"
                   icon="http://deed.static.wowphp.cn/icons/youjiu_home@2x.png"
                   text="有食有酒"
+                  to="/nice"
           />
         </van-grid>
       </van-col>
