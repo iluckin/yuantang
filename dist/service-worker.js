@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.52e251dc5c2ffc61bc4c96e7c949b54d.js"
+  "/precache-manifest.aac22c3e8b36647c0fca832b5ff86630.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vant-demo"});
