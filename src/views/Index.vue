@@ -1,134 +1,76 @@
 <template>
-  <van-row class="banner-box">
-    <div class="header">
-      <van-col span="24">
-        <van-skeleton v-if="!banners" title :row="5" style="background-color: white" />
-        <van-swipe v-if="banners" :autoplay="2500" indicator-color="#fe1111">
-          <van-swipe-item v-for="(image, index) in banners" :key="index">
-            <van-image height="160" :src="image.image" @click="bannerClickEvent(image.title)" />
-          </van-swipe-item>
-        </van-swipe>
-      </van-col>
-      <van-col class="mx-3 notice-box" span="24">
-        <van-notice-bar
-                @click="noticeClickEvent"
-                :text="notice"
-                left-icon="volume-o"
-        />
-      </van-col>
-    </div>
-    <div class="main">
-      <van-col span="24" class="mx-3 service-box">
-        <van-cell value="圆堂服务" style="font-weight: bold" />
-        <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
-          <van-grid-item
-                  icon="http://deed.static.wowphp.cn/icons/house.png"
-                  text="住宅产权"
-                  to="/credentials/house"
-          />
-          <van-grid-item
-                  icon="http://deed.static.wowphp.cn/icons/work-1.png"
-                  text="商业产权"
-                  to="/credentials/store"
-          />
-          <van-grid-item
-                  icon="http://deed.static.wowphp.cn/icons/car.png"
-                  text="车位产权"
-                  to="/credentials/park"
-          />
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/room.png"
-                  text="二手房租售"
-          />
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/loan.png"
-                  text="金融贷款"
-          />
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/net.png"
-                  text="家庭宽带"
-          />
-        </van-grid>
-      </van-col>
-
-      <van-col span="24" class="mx-3 service-box">
-        <van-cell value="品质生活" style="font-weight: bold" />
-        <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/youhua_home@2x.png"
-                  text="有花有树"
-          />
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/youwei_home@2x.png"
-                  text="有滋有味"
-          />
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/youshi_home@2x.png"
-                  text="有人有事"
-          />
-          <van-grid-item
-                  @click="maintain"
-                  icon="http://deed.static.wowphp.cn/icons/youjiu_home@2x.png"
-                  text="有食有酒"
-                  to="/nice"
-          />
-        </van-grid>
-      </van-col>
-    </div>
+  <van-row class="section">
+    {{ boot }}
+    <van-skeleton v-if="!boot" title :row="15" style="background-color: white" />
+    <van-col v-if="boot" span="24" class="header">
+      <van-swipe :autoplay="2500" indicator-color="#fe1111">
+        <van-swipe-item v-for="(item, index) in system.banners" :key="index">
+          <van-image height="160" :src="item.image" @click="bannerHandler(item.title)" />
+        </van-swipe-item>
+      </van-swipe>
+    </van-col>
+    <van-col v-if="boot" class="mx-3 notice-box" span="24">
+      <van-notice-bar
+              @click="noticeHandler"
+              :text="system.notices"
+              left-icon="volume-o"
+      />
+    </van-col>
+    <van-col span="24" v-if="boot">
+      <van-row>
+        <van-col class="mx-3 services" span="24" v-for="(items, name) in system.menus" :key="name">
+          <van-cell :value="name" style="font-weight: bold" />
+          <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
+            <van-grid-item v-for="(item, index) in items" :key="index"
+                           :icon="item.icon"
+                           :text="item.name"
+                           :to="item.link"
+            />
+          </van-grid>
+        </van-col>
+      </van-row>
+    </van-col>
   </van-row>
 </template>
 
 <script>
-  export default {
-    name: 'Index',
-    data () {
-      return {
-        notice: '',
-        banners: null
-      }
+export default {
+  name: 'Index',
+  data () {
+    return {
+      system: null,
+      boot: false
+    }
+  },
+  beforeCreate () {
+    if (! this.$store.state.bootstrap) {
+      this.$axios.get('sys/init').then(r => {
+        this.$store.dispatch('setSystem', r.data.data)
+        this.$store.dispatch('bootstrap')
+      })
+    }
+  },
+  created () {
+    this.system = this.$store.getters.system
+    this.boot = true
+  },
+  methods: {
+    /** 提示信息 */
+    maintain (e) {
+      this.$dialog.alert({
+        message: e.target.innerText ? '您点击了' + e.target.innerText : '近期开放，敬请期待!'
+      })
     },
-    mounted () {
-      this.getData();
+
+    /** 轮播图点击事件 */
+    bannerHandler (index) {
+      this.$toast('点击了' + index)
     },
-    methods: {
-      getData() {
-        ['banner', 'notice'].forEach((url,index) => {
-          this.$axios.get(url)
-            .then(r => {
-              if (index) {
-                this.notice = r.data.data.notice
-              }
-              else {
-                this.banners = r.data.data
-              }
-            })
-            .catch(e => {
-              this.$toast.alert({
-                message: '网络错误，请重试!'
-              })
-            })
-        })
-      },
-      maintain(e) {
-        this.$dialog.alert({
-          message: e.target.innerText ? '您点击了' + e.target.innerText : '近期开放，敬请期待!'
-        });
-      },
-      bannerClickEvent(index) {
-        this.$toast('点击了第' + (index + 1) + '个图片');
-      },
-      noticeClickEvent() {
-        this.$toast('点击了通知栏');
-      }
+
+    /** 轮播图点击事件 */
+    noticeHandler () {
+      this.$toast('点击了通知栏')
     }
   }
+}
 </script>
-<style scoped>
-
-</style>

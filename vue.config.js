@@ -1,3 +1,3 @@
 module.exports = {
-  assetsDir: 'public/static',
+  assetsDir: 'public/static'
 }

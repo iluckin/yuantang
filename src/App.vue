@@ -1,24 +1,20 @@
 <template>
   <div id="app">
-<!--    <div id="nav">-->
-<!--      <router-link to="/">Home</router-link> |-->
-<!--      <router-link to="/about">About</router-link> |-->
-<!--      <router-link to="/index">Index</router-link>-->
-<!--    </div>-->
     <router-view/>
   </div>
 </template>
 <script>
-  export default {
-    name: 'Application',
-    created () {
-      this.$toast.loading({
-        mask: true,
-        message: '正在启动',
-        duration: 1000
-      });
-    }
+import { mapMutations } from 'vuex'
+export default {
+  name: 'Application',
+  beforeCreate () {
+    this.$toast.loading({
+      mask: true,
+      duration: 1000,
+      message: '正在加载'
+    })
   }
+}
 </script>
 <style lang="scss">
 #app {
