@@ -4,15 +4,27 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
 export default {
   name: 'Application',
   beforeCreate () {
     this.$toast.loading({
       mask: true,
-      duration: 1000,
       message: '正在加载'
     })
+  },
+  created () {
+    this.init()
+  },
+  methods: {
+    init () {
+      this.$axios.get('sys/init').then(r => {
+        this.$store.commit('carouselImages', r.data.data.carouselImages)
+        this.$store.commit('navBars', r.data.data.navBars)
+        this.$store.commit('notifications', r.data.data.notifications)
+        this.$store.commit('bootstrap', true)
+        this.$toast.clear()
+      })
+    }
   }
 }
 </script>

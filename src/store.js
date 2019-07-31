@@ -6,40 +6,59 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     bootstrap: false,
-    system: {},
-    member: null
+    carouselImages: [],
+    notifications: '',
+    navBars: [],
+    member: {}
   },
   getters: {
-    system (state) {
-      return state.system
+    carouselImages (state) {
+      return state.carouselImages
+    },
+    notifications (state) {
+      return state.notifications
+    },
+    navBars (state) {
+      return state.navBars
     },
     bootstrap (state) {
       return state.bootstrap
     }
   },
   mutations: {
-    /** 设置全局数据 */
-    setSystemAttribute (state, payload) {
-      state.system = payload
+    /** 设置轮播图 */
+    carouselImages (state, images) {
+      images.map(item => {
+        state.carouselImages.push(item)
+      })
     },
-
-    /** 设置用户数据 */
-    setMemberAttribute (state, payload) {
-      state.member = payload
+    /** 设置轮播图 */
+    navBars (state, bars) {
+      // state.navBars = bars
+      bars.map(item => {
+        console.info(item)
+      })
     },
-
-    /** 设置已启动 */
-    setBootstrap (state, status) {
+    /** 设置首页通知 */
+    notifications (state, notice) {
+      state.notifications = notice
+    },
+    bootstrap (state, status = true) {
       state.bootstrap = status
     }
   },
   actions: {
-    setSystem (ctx, payload) {
-      ctx.commit('setSystemAttribute', payload)
-      console.info(this.state.system)
+    carouselImages (ctx, payload) {
+      ctx.commit('carouselImages', payload)
     },
-    bootstrap (ctx) {
-      ctx.commit('setBootstrap', true)
+    notifications (ctx, notice) {
+      ctx.commit('notifications', notice)
+    },
+    navBars (ctx, bars) {
+      ctx.commit('navBars', bars)
+    },
+    bootstrap (ctx, status = true) {
+      ctx.commit('bootstrap', status)
     }
   }
 })
