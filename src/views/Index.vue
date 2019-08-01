@@ -4,7 +4,7 @@
     <van-col v-if="carouselImages" span="24" class="header">
       <van-swipe :autoplay="2500" indicator-color="#fe1111">
         <van-swipe-item v-for="(item, index) in carouselImages" :key="index">
-          <van-image height="160" :src="item.image" @click="bannerHandler(item.title)" />
+          <van-image class="carousel-item"  height="160" :src="item.image" @click="bannerHandler(item.link)" />
         </van-swipe-item>
       </van-swipe>
     </van-col>
@@ -15,8 +15,8 @@
               left-icon="volume-o"
       />
     </van-col>
-    <van-col span="24">
-      <van-row>
+    <van-col span="24" class="services">
+      <van-row class="services-content">
         <van-col class="mx-3 services" span="24" v-for="(cate, index) in navBars" :key="index">
           <van-cell :value="cate.name" style="font-weight: bold" />
           <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
@@ -52,8 +52,12 @@ export default {
     },
 
     /** 轮播图点击事件 */
-    bannerHandler (index) {
-      this.$toast('点击了' + index)
+    bannerHandler (link) {
+      if (link.indexOf('http') > -1) {
+        window.location.href = link
+        return
+      }
+      this.$router.push({ path: link })
     },
 
     /** 轮播图点击事件 */
@@ -69,3 +73,6 @@ export default {
   }
 }
 </script>
+<style>
+
+</style>

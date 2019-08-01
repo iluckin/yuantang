@@ -13,16 +13,26 @@ export default new Router({
       component: () => import('./views/Index.vue')
     },
     {
-      path: '/credentials/house',
-      component: () => import('./views/credentials/House.vue')
-    },
-    {
-      path: '/credentials/store',
-      component: () => import('./views/credentials/Store.vue')
-    },
-    {
-      path: '/credentials/park',
-      component: () => import('./views/credentials/Park.vue')
+      path: '/credentials',
+      name: 'credentials',
+      component: () => import('./views/Credential.vue'),
+      children: [
+        {
+          path: 'house',
+          name: 'credentials.house',
+          component: () => import('./views/credentials/House.vue')
+        },
+        {
+          path: 'store',
+          name: 'credentials.store',
+          component: () => import('./views/credentials/Store.vue')
+        },
+        {
+          path: 'park',
+          name: 'credentials.park',
+          component: () => import('./views/credentials/Park.vue')
+        }
+      ]
     },
     {
       // 会匹配所有路径

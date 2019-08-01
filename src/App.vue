@@ -8,7 +8,6 @@ export default {
   name: 'Application',
   beforeCreate () {
     this.$toast.loading({
-      mask: true,
       message: '正在加载'
     })
   },
@@ -55,5 +54,8 @@ export default {
 .mx-1 {
   margin-top: 1px;
   margin-bottom: 1px;
+}
+.form {
+  text-align: left;
 }
 </style>
