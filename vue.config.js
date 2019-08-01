@@ -1,3 +1,7 @@
 module.exports = {
-  assetsDir: 'public/static'
+  assetsDir: 'public/static',
+
+  css: {
+    sourceMap: true
+  }
 }

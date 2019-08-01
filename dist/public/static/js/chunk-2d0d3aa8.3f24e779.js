@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d3aa8"],{"5e79":function(e,n,a){"use strict";a.r(n);var t=function(){var e=this,n=e.$createElement,a=e._self._c||n;return a("h2",[e._v("住宅产权")])},u=[],c={name:"House"},s=c,o=a("2877"),r=Object(o["a"])(s,t,u,!1,null,"4500f92a",null);n["default"]=r.exports}}]);
-//# sourceMappingURL=chunk-2d0d3aa8.3f24e779.js.map

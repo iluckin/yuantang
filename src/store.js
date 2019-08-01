@@ -34,9 +34,8 @@ export default new Vuex.Store({
     },
     /** 设置轮播图 */
     navBars (state, bars) {
-      // state.navBars = bars
       bars.map(item => {
-        console.info(item)
+        state.navBars.push(item)
       })
     },
     /** 设置首页通知 */

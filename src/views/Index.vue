@@ -17,10 +17,10 @@
     </van-col>
     <van-col span="24">
       <van-row>
-        <van-col class="mx-3 services" span="24" v-for="(items, name) in navBars" :key="name">
-          <van-cell :value="name" style="font-weight: bold" />
+        <van-col class="mx-3 services" span="24" v-for="(cate, index) in navBars" :key="index">
+          <van-cell :value="cate.name" style="font-weight: bold" />
           <van-grid :column-num="4" :clickable="true" :center="true" :square="true">
-            <van-grid-item v-for="(item, index) in items" :key="index"
+            <van-grid-item v-for="(item, index) in cate.items" :key="index"
                            :icon="item.icon"
                            :text="item.name"
                            :to="item.link"
@@ -38,8 +38,8 @@ export default {
   data () {
     return {
       navBars: this.$store.getters.navBars,
-      bootstrap: this.$store.getters.boostrap,
-      notifications: this.$store.getters.notifications,
+      bootstrap: this.$store.getters.bootstrap,
+      // notifications: this.$store.getters.notifications,
       carouselImages: this.$store.getters.carouselImages
     }
   },
@@ -59,6 +59,12 @@ export default {
     /** 轮播图点击事件 */
     noticeHandler () {
       this.$toast('点击了通知栏')
+    }
+  },
+
+  computed: {
+    notifications () {
+      return this.$store.getters.notifications
     }
   }
 }

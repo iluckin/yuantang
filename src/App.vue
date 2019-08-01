@@ -18,9 +18,9 @@ export default {
   methods: {
     init () {
       this.$axios.get('sys/init').then(r => {
+        this.$store.commit('notifications', r.data.data.notifications)
         this.$store.commit('carouselImages', r.data.data.carouselImages)
         this.$store.commit('navBars', r.data.data.navBars)
-        this.$store.commit('notifications', r.data.data.notifications)
         this.$store.commit('bootstrap', true)
         this.$toast.clear()
       })
