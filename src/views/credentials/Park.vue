@@ -39,7 +39,6 @@
                   placeholder="请输入楼号"
           />
           <van-field
-                  pattern="[0-9]*"
                   v-model="form.unit"
                   label="楼层"
                   placeholder="请输入楼层号"
@@ -142,7 +141,7 @@ export default {
       },
       form: {
         community: '',
-        batch: '',
+        batch: '1',
         floor: '',
         unit: '',
         room: '',
@@ -163,7 +162,6 @@ export default {
         { 'message': '请输入车位号', 'name': 'room' },
         { 'message': '请输入楼层号', 'name': 'unit' },
         { 'message': '请输入楼号', 'name': 'floor' },
-        { 'message': '请输入期号', 'name': 'batch' },
         { 'message': '请选择小区', 'name': 'community' }
       ]
       let hasError = false

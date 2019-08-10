@@ -142,7 +142,7 @@ export default {
       },
       form: {
         community: '',
-        batch: '',
+        batch: '1',
         floor: '',
         unit: '',
         room: '',
@@ -163,7 +163,6 @@ export default {
         { 'message': '请输入房间号', 'name': 'room' },
         { 'message': '请输入单元号', 'name': 'unit' },
         { 'message': '请输入楼号', 'name': 'floor' },
-        { 'message': '请输入期号', 'name': 'batch' },
         { 'message': '请选择小区', 'name': 'community' }
       ]
       let hasError = false
@@ -184,6 +183,7 @@ export default {
         params: this.form
       }).then(r => {
         if (r.data.code === 5000) {
+          this.$toast.clear()
           return this.$notify(r.data.msg)
         }
 

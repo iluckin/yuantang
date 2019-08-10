@@ -10,7 +10,7 @@ import './registerServiceWorker'
 Vue.use(Vant)
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = (process.env.NODE_ENV === 'development') ? 'http://172.16.5.56:9000/api/' : 'https://pc.yuantang.iluckin.cn/api/'
+axios.defaults.baseURL = (process.env.NODE_ENV === 'development') ? 'http://deed.dev.1d1d100.net/api/' : 'https://pc.yuantang.iluckin.cn/api/'
 
 Vue.prototype.$axios = axios
 
